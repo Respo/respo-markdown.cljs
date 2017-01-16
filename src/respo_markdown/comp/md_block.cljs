@@ -10,4 +10,9 @@
 (def comp-md-block
   (create-comp
    :md-block
-   (fn [text options] (fn [state mutate!] (div {} (comp-text (split-block text) nil))))))
+   (fn [text options]
+     (fn [state mutate!]
+       (let [blocks (split-block text)]
+         (div
+          {}
+          (->> blocks (map-indexed (fn [idx block] [idx (comp-text (pr-str block) nil)])))))))))

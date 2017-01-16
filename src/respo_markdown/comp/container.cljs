@@ -5,7 +5,7 @@
             [respo.alias :refer [create-comp div span textarea]]
             [respo.comp.space :refer [comp-space]]
             [respo.comp.text :refer [comp-text]]
-            [respo-markdown.comp.md-block :refer [comp-md-block]]))
+            [respo-markdown.comp.md-article :refer [comp-md-article]]))
 
 (defn update-state [state k v] (assoc state k v))
 
@@ -22,6 +22,6 @@
        :event {:input (fn [e dispatch!] (mutate! :draft (:value e)))},
        :attrs {:placeholder "Some markdown content", :value (:draft state)}})
      (comp-space 8 nil)
-     (comp-md-block (:draft state) {}))))
+     (comp-md-article (:draft state) {}))))
 
 (def comp-container (create-comp :container init-state update-state render))
