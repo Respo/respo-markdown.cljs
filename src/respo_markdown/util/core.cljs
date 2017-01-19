@@ -31,8 +31,8 @@
 (defn split-line
   ([line] (split-line [] line "" :text))
   ([acc line buffer mode]
-   (if (string/blank? line)
-     (if (string/blank? buffer) acc (conj acc [mode buffer]))
+   (if (= "" line)
+     (if (= "" buffer) acc (conj acc [mode buffer]))
      (let [cursor (first line), left (subs line 1)]
        (case mode
          :text
@@ -44,9 +44,9 @@
                  (let [pieces (string/split line " ")]
                    (recur
                     (conj
-                     (if (string/blank? buffer) acc (conj acc [:text buffer]))
+                     (if (= "" buffer) acc (conj acc [:text buffer]))
                      [:url (first pieces)])
-                    (string/join " " (rest pieces))
+                    (str " " (string/join " " (rest pieces)))
                     ""
                     :text))
                  (recur acc left (str buffer "h") :text))
@@ -55,9 +55,7 @@
                      guess (re-find pattern line)]
                  (if (some? guess)
                    (recur
-                    (conj
-                     (if (string/blank? buffer) acc (conj acc [:text buffer]))
-                     [:link guess])
+                    (conj (if (= "" buffer) acc (conj acc [:text buffer])) [:link guess])
                     (string/replace line pattern "")
                     ""
                     :text)
@@ -67,9 +65,7 @@
                      guess (re-find pattern line)]
                  (if (some? guess)
                    (recur
-                    (conj
-                     (if (string/blank? buffer) acc (conj acc [:text buffer]))
-                     [:image guess])
+                    (conj (if (= "" buffer) acc (conj acc [:text buffer])) [:image guess])
                     (string/replace line pattern "")
                     ""
                     :text)

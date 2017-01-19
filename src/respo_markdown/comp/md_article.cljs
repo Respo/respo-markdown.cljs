@@ -10,13 +10,13 @@
             [respo-markdown.util.string :refer [br]]))
 
 (defn comp-image [chunk]
-  (let [useful (subs chunk 2 (- (count chunk) 3)), [content url] (string/split useful "](")]
+  (let [useful (subs chunk 2 (- (count chunk) 1)), [content url] (string/split useful "](")]
     (img {:attrs {:alt content, :src url}})))
 
 (defn h3 [props & children] (create-element :h3 props children))
 
 (defn comp-link [chunk]
-  (let [useful (subs chunk 1 (- (count chunk) 2)), [content url] (string/split useful "](")]
+  (let [useful (subs chunk 1 (- (count chunk) 1)), [content url] (string/split useful "](")]
     (a {:attrs {:inner-text content, :target "_blank", :href url}})))
 
 (defn blockquote [props & children] (create-element :blockquote props children))

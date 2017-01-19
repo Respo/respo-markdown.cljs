@@ -22,9 +22,9 @@
 (def +version+ "0.1.0")
 
 (task-options!
-  pom {:project     'Respo/markdown
+  pom {:project     'respo/markdown
        :version     +version+
-       :description "Workflow"
+       :description "Respo Markdown converter"
        :url         "https://github.com/Respo/respo-markdown"
        :scm         {:url "https://github.com/Respo/respo-markdown"}
        :license     {"MIT" "http://opensource.org/licenses/mit-license.php"}})
@@ -98,7 +98,7 @@
 
 (deftask rsync []
   (with-pre-wrap fileset
-    (sh "rsync" "-r" "target/" "repo.tiye.me:repo/Respo/markdown" "--exclude" "main.out" "--delete")
+    (sh "rsync" "-r" "target/" "repo.respo.site:repo/Respo/markdown" "--exclude" "main.out" "--delete")
     fileset))
 
 (deftask build []
