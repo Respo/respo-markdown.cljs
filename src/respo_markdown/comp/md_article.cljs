@@ -3,17 +3,37 @@
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.style :as ui]
-            [respo.alias :refer [create-comp create-element div pre code p h1 h2]]
+            [respo.alias :refer [create-comp create-element div pre code p h1 h2 img a]]
             [respo.comp.space :refer [comp-space]]
-            [respo.comp.text :refer [comp-text]]
-            [respo-markdown.util.core :refer [split-block]]
+            [respo.comp.text :refer [comp-text comp-code]]
+            [respo-markdown.util.core :refer [split-block split-line]]
             [respo-markdown.util.string :refer [br]]))
+
+(defn comp-image [chunk]
+  (let [useful (subs chunk 2 (- (count chunk) 3)), [content url] (string/split useful "](")]
+    (img {:attrs {:alt content, :src url}})))
 
 (defn h3 [props & children] (create-element :h3 props children))
 
+(defn comp-link [chunk]
+  (let [useful (subs chunk 1 (- (count chunk) 2)), [content url] (string/split useful "](")]
+    (a {:attrs {:inner-text content, :target "_blank", :href url}})))
+
 (defn blockquote [props & children] (create-element :blockquote props children))
 
-(defn render-inline [text] (comp-text text nil))
+(defn render-inline [text]
+  (->> (split-line text)
+       (map-indexed
+        (fn [idx chunk]
+          [idx
+           (let [[mode content] chunk]
+             (case mode
+               :code (comp-code content nil)
+               :url (a {:attrs {:inner-text content, :target "_blank", :href content}})
+               :link (comp-link content)
+               :image (comp-image content)
+               :text (comp-text content nil)
+               (comp-text (str "Unknown:" content) nil)))]))))
 
 (defn li [props & children] (create-element :li props children))
 
@@ -28,7 +48,7 @@
          (string/starts-with? line "### ") (h3 {} (render-inline (subs line 4)))
          (string/starts-with? line "> ") (blockquote {} (render-inline (subs line 2)))
          (string/starts-with? line "* ") (li {} (render-inline (subs line 2)))
-         :else (div {} (comp-text line nil)))))))
+         :else (div {} (render-inline line)))))))
 
 (def comp-text-block
   (create-comp
