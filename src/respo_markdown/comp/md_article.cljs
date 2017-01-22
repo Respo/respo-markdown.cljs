@@ -62,6 +62,8 @@
 (def style-code
   {:color :white, :background-color (hsl 300 80 20), :padding 8, :display :block})
 
+(def style-container {:padding 8})
+
 (def comp-code-block
   (create-comp
    :code-block
@@ -77,7 +79,7 @@
      (fn [state mutate!]
        (let [blocks (split-block text)]
          (div
-          {}
+          {:style (merge ui/flex style-container)}
           (->> blocks
                (map-indexed
                 (fn [idx block]
