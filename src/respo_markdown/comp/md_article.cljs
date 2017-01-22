@@ -55,7 +55,9 @@
    :text-block
    (fn [lines]
      (fn [state mutate!]
-       (p {} (->> lines (map-indexed (fn [idx line] [idx (comp-line line)]))))))))
+       (div
+        {:class-name "md-line"}
+        (->> lines (map-indexed (fn [idx line] [idx (comp-line line)]))))))))
 
 (def style-code
   {:color :white, :background-color (hsl 300 80 20), :padding 8, :display :block})

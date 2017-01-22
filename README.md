@@ -20,7 +20,7 @@ Supported features:
 ### Usage
 
 ```clojure
-[respo/markdown "0.1.0"]
+[respo/markdown "0.1.1"]
 ```
 
 ```clojure
