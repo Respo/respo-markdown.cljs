@@ -56,11 +56,8 @@
    (fn [lines]
      (fn [state mutate!]
        (div
-        {:class-name "md-line"}
+        {:attrs {:class-name "md-paragraph"}}
         (->> lines (map-indexed (fn [idx line] [idx (comp-line line)]))))))))
-
-(def style-code
-  {:color :white, :background-color (hsl 300 80 20), :padding 8, :display :block})
 
 (def style-container {:padding 8})
 
@@ -70,7 +67,7 @@
    (fn [lines]
      (fn [state mutate!]
        (let [lang (first lines), content (string/join br (rest lines))]
-         (pre {:style style-code} (code {:attrs {:inner-text content}})))))))
+         (pre {:attrs {:class-name "md-code-block"}} (code {:attrs {:inner-text content}})))))))
 
 (def comp-md-article
   (create-comp
@@ -79,7 +76,7 @@
      (fn [state mutate!]
        (let [blocks (split-block text)]
          (div
-          {:style (merge ui/flex style-container)}
+          {:style (merge ui/flex style-container), :attrs {:class-name "md-article"}}
           (->> blocks
                (map-indexed
                 (fn [idx block]

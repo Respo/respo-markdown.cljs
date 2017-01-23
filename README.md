@@ -20,12 +20,29 @@ Supported features:
 ### Usage
 
 ```clojure
-[respo/markdown "0.1.1"]
+[respo/markdown "0.1.2"]
 ```
 
 ```clojure
 (respo-markdown.comp.md-article/comp-md-article "a\n" {})
 ; returns DSL
+```
+
+Write your own CSS to style the HTML:
+
+```css
+.md-article {}
+
+.md-paragraph {
+  margin: 16px 0;
+}
+
+.md-code-block {
+  color: white;
+  background-color: hsl(300, 80%, 20%);
+  padding: 8px;
+  display: block;
+}
 ```
 
 ### Develop

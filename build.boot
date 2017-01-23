@@ -19,7 +19,7 @@
          '[adzerk.boot-test   :refer :all]
          '[clojure.java.io    :as    io])
 
-(def +version+ "0.1.1")
+(def +version+ "0.1.2")
 
 (task-options!
   pom {:project     'respo/markdown
@@ -36,6 +36,7 @@
         (title {:attrs {:innerHTML "Markdown"}})
         (link {:attrs {:rel "icon" :type "image/png" :href "http://logo.mvc-works.org/mvc.png"}})
         (link {:attrs {:rel "stylesheet" :type "text/css" :href "style.css"}})
+        (link {:attrs {:rel "stylesheet" :type "text/css" :href "md.css"}})
         (link {:attrs {:rel "manifest" :href "manifest.json"}})
         (meta' {:attrs {:charset "utf-8"}})
         (meta' {:attrs {:name "viewport" :content "width=device-width, initial-scale=1"}})

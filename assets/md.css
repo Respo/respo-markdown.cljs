@@ -1,0 +1,11 @@
+
+.md-paragraph {
+  margin: 16px 0;
+}
+
+.md-code-block {
+  color: white;
+  background-color: hsl(300, 80%, 20%);
+  padding: 8px;
+  display: block;
+}
