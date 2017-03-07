@@ -13,7 +13,7 @@
         (link {:attrs {:rel "icon" :type "image/png" :href "http://logo.mvc-works.org/mvc.png"}})
         (link {:attrs {:rel "stylesheet" :type "text/css" :href "style.css"}})
         (link {:attrs {:rel "stylesheet" :type "text/css" :href "md.css"}})
-        (link {:attrs {:rel "manifest" :href "manifest.json"}})
+        (link (:attrs {:rel "manifest" :href "manifest.json"}))
         (meta' {:attrs {:charset "utf-8"}})
         (meta' {:attrs {:name "viewport" :content "width=device-width, initial-scale=1"}})
         (meta' {:attrs {:id "ssr-stages" :content (pr-str ssr-stages)}})
@@ -24,16 +24,21 @@
         (div {:attrs {:id "app" :innerHTML html-content}})
         (script {:attrs {:src "main.js"}})))))
 
-(defn generate-html [ssr-stages]
-  (let [ tree (comp-container {} ssr-stages)
+(defn generate-html []
+  (let [ tree (comp-container {} #{:shell})
          html-content (make-string tree)]
-    (html-dsl {:build? true} html-content ssr-stages)))
+    (html-dsl {:build? true} html-content #{:shell})))
+
+(defn generate-empty-html []
+  (html-dsl {:build? true} "" {}))
 
 (defn spit [file-name content]
   (let [fs (js/require "fs")]
     (.writeFileSync fs file-name content)))
 
 (defn -main []
-  (spit "target/index.html" (generate-html #{:shell})))
+  (if (= js/process.env.env "dev")
+    (spit "target/dev.html" (generate-empty-html))
+    (spit "target/index.html" (generate-html))))
 
 (-main)

@@ -11,13 +11,13 @@
 
 (defn comp-image [chunk]
   (let [useful (subs chunk 2 (- (count chunk) 1)), [content url] (string/split useful "](")]
-    (img {:attrs {:alt content, :src url}})))
+    (img {:attrs {:src url, :alt content}})))
 
 (defn h3 [props & children] (create-element :h3 props children))
 
 (defn comp-link [chunk]
   (let [useful (subs chunk 1 (- (count chunk) 1)), [content url] (string/split useful "](")]
-    (a {:attrs {:inner-text content, :target "_blank", :href url}})))
+    (a {:attrs {:href url, :inner-text content, :target "_blank"}})))
 
 (defn blockquote [props & children] (create-element :blockquote props children))
 
@@ -29,7 +29,7 @@
            (let [[mode content] chunk]
              (case mode
                :code (comp-code content nil)
-               :url (a {:attrs {:inner-text content, :target "_blank", :href content}})
+               :url (a {:attrs {:href content, :inner-text content, :target "_blank"}})
                :link (comp-link content)
                :image (comp-image content)
                :text (comp-text content nil)
