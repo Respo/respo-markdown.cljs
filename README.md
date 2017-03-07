@@ -28,6 +28,15 @@ Supported features:
 ; returns DSL
 ```
 
+For options `{}`, [`cljsjs.highlight`](https://github.com/cljsjs/packages/tree/master/highlight) is suggested:
+
+```clojure
+{:highlight (fn [code lang]
+   (let [result (.highlight js/hljs lang code)]
+     (comment .log js/console "Result" result code lang js/hljs)
+     (.-value result)))}
+```
+
 Write your own CSS to style the HTML:
 
 ```css

@@ -7,7 +7,10 @@
                                  ["[]" "respo.alias" ":refer" ["[]" "create-comp" "div" "span" "textarea"]]
                                  ["[]" "respo.comp.space" ":refer" ["[]" "comp-space"]]
                                  ["[]" "respo.comp.text" ":refer" ["[]" "comp-text"]]
-                                 ["[]" "respo-markdown.comp.md-article" ":refer" ["[]" "comp-md-article"]]]],
+                                 ["[]" "respo-markdown.comp.md-article" ":refer" ["[]" "comp-md-article"]]
+                                 ["[]" "cljsjs.highlight"]
+                                 ["[]" "cljsjs.highlight.langs.clojure"]
+                                 ["[]" "cljsjs.highlight.langs.bash"]]],
                            :defs {"init-state" ["defn" "init-state" ["&" "args"] ["{}" [":draft" "|"]]],
                                   "comp-container" ["def"
                                                     "comp-container"
@@ -40,7 +43,23 @@
                                                              ["fn"
                                                               ["e" "dispatch!"]
                                                               ["mutate!" ":draft" [":value" "e"]]]]]]]]
-                                                        ["comp-md-article" [":draft" "state"] ["{}"]]]]]]],
+                                                        ["comp-md-article"
+                                                         [":draft" "state"]
+                                                         ["{}"
+                                                          [":highlight"
+                                                           ["fn"
+                                                            ["code" "lang"]
+                                                            ["let"
+                                                             [["result" [".highlight" "js/hljs" "lang" "code"]]]
+                                                             ["--"
+                                                              ".log"
+                                                              "js/console"
+                                                              "|Result"
+                                                              "result"
+                                                              "code"
+                                                              "lang"
+                                                              "js/hljs"]
+                                                             [".-value" "result"]]]]]]]]]]],
                                   "style-container" ["def" "style-container" ["{}" [":align-items" ":stretch"]]],
                                   "update-state" ["defn" "update-state" ["state" "k" "v"] ["assoc" "state" "k" "v"]],
                                   "style-text" ["def" "style-text" ["{}"]]},
@@ -308,7 +327,7 @@
                                                                 ["case"
                                                                  "mode"
                                                                  [":text" ["comp-text-block" "lines"]]
-                                                                 [":code" ["comp-code-block" "lines"]]
+                                                                 [":code" ["comp-code-block" "lines" "options"]]
                                                                  ["comp-text" "|Unknown content."]]]]]]]]]]]]],
                                    "style-container" ["def" "style-container" ["{}" [":padding" "8"]]],
                                    "comp-link" ["defn"
@@ -360,15 +379,24 @@
                                                       ["create-comp"
                                                        ":code-block"
                                                        ["fn"
-                                                        ["lines"]
+                                                        ["lines" "options"]
                                                         ["fn"
                                                          ["state" "mutate!"]
                                                          ["let"
                                                           [["lang" ["first" "lines"]]
-                                                           ["content" ["string/join" "br" ["rest" "lines"]]]]
+                                                           ["content" ["string/join" "br" ["rest" "lines"]]]
+                                                           ["highlight-fn" [":highlight" "options"]]]
                                                           ["pre"
                                                            ["{}" [":attrs" ["{}" [":class-name" "|md-code-block"]]]]
-                                                           ["code" ["{}" [":attrs" ["{}" [":inner-text" "content"]]]]]]]]]]],
+                                                           ["code"
+                                                            ["{}"
+                                                             [":attrs"
+                                                              ["if"
+                                                               ["and"
+                                                                ["not" ["string/blank?" "lang"]]
+                                                                ["fn?" "highlight-fn"]]
+                                                               ["{}" [":innerHTML" ["highlight-fn" "content" "lang"]]]
+                                                               ["{}" [":inner-text" "content"]]]]]]]]]]]],
                                    "li" ["defn"
                                          "li"
                                          ["props" "&" "children"]

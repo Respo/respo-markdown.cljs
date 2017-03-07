@@ -64,10 +64,17 @@
 (def comp-code-block
   (create-comp
    :code-block
-   (fn [lines]
+   (fn [lines options]
      (fn [state mutate!]
-       (let [lang (first lines), content (string/join br (rest lines))]
-         (pre {:attrs {:class-name "md-code-block"}} (code {:attrs {:inner-text content}})))))))
+       (let [lang (first lines)
+             content (string/join br (rest lines))
+             highlight-fn (:highlight options)]
+         (pre
+          {:attrs {:class-name "md-code-block"}}
+          (code
+           {:attrs (if (and (not (string/blank? lang)) (fn? highlight-fn))
+              {:innerHTML (highlight-fn content lang)}
+              {:inner-text content})})))))))
 
 (def comp-md-article
   (create-comp
@@ -85,5 +92,5 @@
                      (comp-text (pr-str mode) nil)
                      (case mode
                        :text (comp-text-block lines)
-                       :code (comp-code-block lines)
+                       :code (comp-code-block lines options)
                        (comp-text "Unknown content.")))])))))))))

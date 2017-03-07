@@ -5,7 +5,10 @@
             [respo.alias :refer [create-comp div span textarea]]
             [respo.comp.space :refer [comp-space]]
             [respo.comp.text :refer [comp-text]]
-            [respo-markdown.comp.md-article :refer [comp-md-article]]))
+            [respo-markdown.comp.md-article :refer [comp-md-article]]
+            [cljsjs.highlight]
+            [cljsjs.highlight.langs.clojure]
+            [cljsjs.highlight.langs.bash]))
 
 (defn init-state [& args] {:draft ""})
 
@@ -28,4 +31,9 @@
          {:style (merge ui/textarea ui/flex style-text),
           :attrs {:placeholder "Some markdown content", :value (:draft state)},
           :event {:input (fn [e dispatch!] (mutate! :draft (:value e)))}})
-        (comp-md-article (:draft state) {}))))))
+        (comp-md-article
+         (:draft state)
+         {:highlight (fn [code lang]
+            (let [result (.highlight js/hljs lang code)]
+              (comment .log js/console "Result" result code lang js/hljs)
+              (.-value result)))}))))))
