@@ -17,7 +17,11 @@
 
 (defn comp-link [chunk]
   (let [useful (subs chunk 1 (- (count chunk) 1)), [content url] (string/split useful "](")]
-    (a {:attrs {:href url, :inner-text content, :target "_blank"}})))
+    (if (and (string/starts-with? content "`") (string/ends-with? content "`"))
+      (a
+       {:attrs {:href url, :target "_blank"}}
+       (code {:attrs {:inner-text (subs content 1 (dec (count content)))}}))
+      (a {:attrs {:href url, :inner-text content, :target "_blank"}}))))
 
 (defn blockquote [props & children] (create-element :blockquote props children))
 
