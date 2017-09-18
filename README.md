@@ -20,7 +20,7 @@ Supported features:
 ### Usage
 
 ```clojure
-[respo/markdown "0.1.3"]
+[respo/markdown "0.1.4"]
 ```
 
 ```clojure
@@ -56,7 +56,7 @@ Write your own CSS to style the HTML:
 
 ### Develop
 
-Workflow https://github.com/mvc-works/stack-workflow
+Workflow https://github.com/mvc-works/coworkflow
 
 ### License
 

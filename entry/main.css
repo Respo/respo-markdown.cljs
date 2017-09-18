@@ -1,4 +1,14 @@
 
+@import url(~highlight.js/styles/dark.css);
+
+body {
+  margin: 0;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
 .md-paragraph {
   margin: 16px 0;
 }

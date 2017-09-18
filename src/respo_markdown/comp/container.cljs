@@ -1,39 +1,29 @@
 
 (ns respo-markdown.comp.container
+  (:require-macros [respo.macros :refer [defcomp <> div span textarea]])
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
-            [respo.alias :refer [create-comp div span textarea]]
-            [respo.comp.space :refer [comp-space]]
-            [respo.comp.text :refer [comp-text]]
-            [respo-markdown.comp.md-article :refer [comp-md-article]]
-            [cljsjs.highlight]
-            [cljsjs.highlight.langs.clojure]
-            [cljsjs.highlight.langs.bash]))
-
-(defn init-state [& args] {:draft ""})
+            [respo.core :refer [create-comp]]
+            [respo.comp.space :refer [=<]]
+            [respo-markdown.comp.md-article :refer [comp-md-article]]))
 
 (def style-container {:align-items :stretch})
 
-(defn update-state [state k v] (assoc state k v))
-
 (def style-text {})
 
-(def comp-container
-  (create-comp
-   :container
-   init-state
-   update-state
-   (fn [store]
-     (fn [state mutate!]
-       (div
-        {:style (merge ui/global ui/fullscreen ui/row style-container)}
-        (textarea
-         {:style (merge ui/textarea ui/flex style-text),
-          :attrs {:placeholder "Some markdown content", :value (:draft state)},
-          :event {:input (fn [e dispatch!] (mutate! :draft (:value e)))}})
-        (comp-md-article
-         (:draft state)
-         {:highlight (fn [code lang]
-            (let [result (.highlight js/hljs lang code)]
-              (comment .log js/console "Result" result code lang js/hljs)
-              (.-value result)))}))))))
+(def initial-state {:draft ""})
+
+(defcomp
+ comp-container
+ (store highlighter)
+ (let [states (:states store), state (or (:data states) initial-state)]
+   (div
+    {:style (merge ui/global ui/fullscreen ui/row style-container)}
+    (textarea
+     {:placeholder "Some markdown content",
+      :value (:draft state),
+      :style (merge ui/textarea ui/flex style-text),
+      :on {:input (fn [e dispatch! mutate!]
+             (println "Editing:" state (:value e))
+             (mutate! (assoc state :draft (:value e))))}})
+    (comp-md-article (:draft state) {:highlight highlighter}))))

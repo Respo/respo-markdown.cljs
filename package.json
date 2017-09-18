@@ -1,10 +1,21 @@
 {
   "name": "respo-markdown",
   "version": "0.1.0",
-  "description": "Respo Markdown implementation",
+  "description": "Stack Workflow",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tiye": "rsync -r dist/ repo.tiye.me:repo/Respo/respo-markdown/",
+    "release": "shadow-cljs release browser",
+    "watch": "shadow-cljs watch browser",
+    "compile-ssr": "shadow-cljs compile ssr",
+    "html-dev": "env=dev node target/ssr.js",
+    "html": "node target/ssr.js",
+    "hmr": "webpack-dev-server --config webpack.dev.coffee --hot-only",
+    "webpack": "webpack --config webpack.release.coffee --hide-modules --progress",
+    "dev": "yarn compile-ssr && yarn html-dev && yarn hmr",
+    "del": "rm -rf dist/*",
+    "serve": "http-server dist",
+    "build": "yarn del && yarn release && yarn webpack && yarn compile-ssr && yarn html && yarn serve"
   },
   "repository": {
     "type": "git",
@@ -13,12 +24,22 @@
   "author": "jiyinyiyong",
   "license": "MIT",
   "devDependencies": {
-    "css-loader": "^0.26.2",
-    "extract-text-webpack-plugin": "^2.0.0-beta.4",
-    "file-loader": "^0.10.1",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "webpack": "^2.1.0-beta.25",
-    "respo-ui": "^0.1.2"
+    "coffee-script": "^1.12.7",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "http-server": "^0.10.0",
+    "respo-ui": "^0.1.2",
+    "shadow-cljs": "^0.18.7",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^0.4.4",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.8.1",
+    "webpack-manifest-plugin": "^1.3.2"
+  },
+  "dependencies": {
+    "highlight.js": "^9.12.0"
   }
 }

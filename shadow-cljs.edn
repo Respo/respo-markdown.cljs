@@ -1,0 +1,25 @@
+
+{:source-paths ["src"]
+ :dependencies [[mvc-works/hsl          "0.1.2"]
+                [mvc-works/shell-page   "0.1.2"]
+                [mvc-works/verbosely    "0.1.0-rc2"]
+                [respo/ui               "0.1.9"]
+                [cljsjs/highlight       "9.6.0-0"]
+                [respo                  "0.6.2"]]
+ :http {:host "localhost" :port 8081}
+ :open-file-command ["/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ["%s:%s:%s" :file :line :column]]
+ :builds {:browser {:target :browser
+                    :output-dir "target/browser"
+                    :asset-path "/browser"
+                    :modules {:main {:entries [respo-markdown.main]
+                                     :depends-on #{:lib}}
+                              :lib {:entries [respo.core respo.macros
+                                              respo.comp.inspect]}}
+                    :devtools {:after-load respo-markdown.main/reload!
+                               :preloads [shadow.cljs.devtools.client.hud]}
+                    :release {:output-dir "dist/"
+                              :module-hash-names true}}
+          :ssr {:target :node-script
+                :output-to "target/ssr.js"
+                :main respo-markdown.render/main!
+                :devtools {:after-load respo-markdown.render/main!}}}}

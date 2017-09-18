@@ -1,11 +1,9 @@
 
 (ns respo-markdown.util.core
-  (:require [clojure.string :as string]
-            [cljs.reader :refer [read-string]]
-            [respo-markdown.util.string :refer [br]]))
+  (:require [clojure.string :as string] [cljs.reader :refer [read-string]]))
 
 (defn split-block
-  ([text] (split-block (string/split text br) [] [] :empty))
+  ([text] (split-block (string/split text "\n") [] [] :empty))
   ([lines acc buffer mode]
    (if (empty? lines)
      (if (empty? buffer) acc (conj acc [mode buffer]))

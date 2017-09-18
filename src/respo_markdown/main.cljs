@@ -1,40 +1,38 @@
 
 (ns respo-markdown.main
-  (:require [respo.core
-             :refer
-             [render! clear-cache! falsify-stage! render-element gc-states!]]
+  (:require [respo.core :refer [render! clear-cache! realize-ssr!]]
             [respo-markdown.comp.container :refer [comp-container]]
-            [cljs.reader :refer [read-string]]))
+            [cljs.reader :refer [read-string]]
+            [respo-markdown.schema :as schema]
+            [respo.cursor :refer [mutate]]
+            [cljsjs.highlight]
+            [cljsjs.highlight.langs.clojure]
+            [cljsjs.highlight.langs.bash]))
 
-(defn dispatch! [op op-data] )
+(defonce store-ref (atom schema/store))
 
-(defonce store-ref (atom {}))
+(defn dispatch! [op op-data]
+  (let [next-store (if (= op :states) (update @store-ref :states (mutate op-data)) @store-ref)]
+    (reset! store-ref next-store)))
 
-(defonce states-ref (atom {}))
+(def mount-target (.querySelector js/document ".app"))
 
-(defn render-app! []
-  (let [target (.querySelector js/document "#app")]
-    (render! (comp-container @store-ref) target dispatch! states-ref)))
+(defn highligher [code lang]
+  (let [result (.highlight js/hljs lang code)]
+    (comment .log js/console "Result" result code lang js/hljs)
+    (.-value result)))
 
-(def ssr-stages
-  (let [ssr-element (.querySelector js/document "#ssr-stages")
-        ssr-markup (.getAttribute ssr-element "content")]
-    (read-string ssr-markup)))
+(defn render-app! [renderer]
+  (renderer mount-target (comp-container @store-ref highligher) dispatch!))
 
-(defn -main! []
-  (enable-console-print!)
-  (if (not (empty? ssr-stages))
-    (let [target (.querySelector js/document "#app")]
-      (falsify-stage!
-       target
-       (render-element (comp-container @store-ref ssr-stages) states-ref)
-       dispatch!)))
-  (render-app!)
-  (add-watch store-ref :gc (fn [] (gc-states! states-ref)))
-  (add-watch store-ref :changes render-app!)
-  (add-watch states-ref :changes render-app!)
+(defn reload! [] (clear-cache!) (render-app! render!) (println "Code update."))
+
+(def ssr? (some? (.querySelector js/document "meta.respo-ssr")))
+
+(defn main! []
+  (if ssr? (render-app! realize-ssr!))
+  (render-app! render!)
+  (add-watch store-ref :changes (fn [] (render-app! render!)))
   (println "App started!"))
 
-(defn on-jsload! [] (clear-cache!) (render-app!) (println "Code update."))
-
-(set! (.-onload js/window) -main!)
+(set! (.-onload js/window) main!)
