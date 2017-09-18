@@ -9,11 +9,11 @@
             [cljsjs.highlight.langs.clojure]
             [cljsjs.highlight.langs.bash]))
 
-(defonce store-ref (atom schema/store))
+(defonce *store (atom schema/store))
 
 (defn dispatch! [op op-data]
-  (let [next-store (if (= op :states) (update @store-ref :states (mutate op-data)) @store-ref)]
-    (reset! store-ref next-store)))
+  (let [next-store (if (= op :states) (update @*store :states (mutate op-data)) @*store)]
+    (reset! *store next-store)))
 
 (def mount-target (.querySelector js/document ".app"))
 
@@ -23,7 +23,7 @@
     (.-value result)))
 
 (defn render-app! [renderer]
-  (renderer mount-target (comp-container @store-ref highligher) dispatch!))
+  (renderer mount-target (comp-container @*store highligher) dispatch!))
 
 (defn reload! [] (clear-cache!) (render-app! render!) (println "Code update."))
 
@@ -32,7 +32,7 @@
 (defn main! []
   (if ssr? (render-app! realize-ssr!))
   (render-app! render!)
-  (add-watch store-ref :changes (fn [] (render-app! render!)))
+  (add-watch *store :changes (fn [] (render-app! render!)))
   (println "App started!"))
 
 (set! (.-onload js/window) main!)
