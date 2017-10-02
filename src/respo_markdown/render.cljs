@@ -28,18 +28,24 @@
     (comment .log js/console "Result" result code lang hljs)
     (.-value result)))
 
+(def preview? (= "preview" js/process.env.prod))
+
 (defn prod-page []
   (let [html-content (make-string (comp-container schema/store highligher))
         manifest (.parse js/JSON (slurp "dist/assets-manifest.json"))
-        cljs-manifest (.parse js/JSON (slurp "dist/manifest.json"))]
+        cljs-manifest (.parse js/JSON (slurp "dist/manifest.json"))
+        cdn (if preview? "" " http://repo-cdn.b0.upaiyun.com/respo-markdown/")
+        prefix-cdn (fn [x] (str cdn x))]
     (make-page
      html-content
      (merge
       base-info
-      {:styles [(aget manifest "main.css")],
-       :scripts [(aget manifest "main.js")
-                 (-> cljs-manifest (aget 0) (aget "js-name"))
-                 (-> cljs-manifest (aget 1) (aget "js-name"))],
+      {:styles [(prefix-cdn (aget manifest "main.css"))],
+       :scripts (map
+                 prefix-cdn
+                 [(aget manifest "main.js")
+                  (-> cljs-manifest (aget 0) (aget "js-name"))
+                  (-> cljs-manifest (aget 1) (aget "js-name"))]),
        :ssr "respo-ssr"}))))
 
 (defn main! []
