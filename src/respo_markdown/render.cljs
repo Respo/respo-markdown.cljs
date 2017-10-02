@@ -41,11 +41,12 @@
      (merge
       base-info
       {:styles [(prefix-cdn (aget manifest "main.css"))],
-       :scripts (map
-                 prefix-cdn
-                 [(aget manifest "main.js")
-                  (-> cljs-manifest (aget 0) (aget "js-name"))
-                  (-> cljs-manifest (aget 1) (aget "js-name"))]),
+       :scripts ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+                 "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"
+                 "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"
+                 (prefix-cdn (aget manifest "main.js"))
+                 (prefix-cdn (-> cljs-manifest (aget 0) (aget "js-name")))
+                 (prefix-cdn (-> cljs-manifest (aget 1) (aget "js-name")))],
        :ssr "respo-ssr"}))))
 
 (defn main! []
