@@ -67,7 +67,7 @@
                     (string/replace line pattern "")
                     ""
                     :text)
-                   (recur acc left (str buffer "[") :text)))
+                   (recur acc left (str buffer "!") :text)))
              (recur acc left (str buffer cursor) :text))
          :code
            (if (= cursor "`")

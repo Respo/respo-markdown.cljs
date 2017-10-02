@@ -13,7 +13,13 @@
    ""
    (merge
     base-info
-    {:styles [], :scripts ["/main.js" "/browser/lib.js" "/browser/main.js"]})))
+    {:styles [],
+     :scripts ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+               "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"
+               "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"
+               "/main.js"
+               "/browser/lib.js"
+               "/browser/main.js"]})))
 
 (def hljs (js/require "highlight.js"))
 

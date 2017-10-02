@@ -1,6 +1,7 @@
 
 (ns respo-markdown.comp.md-article
-  (:require-macros [respo.macros :refer [defcomp div pre code span p h1 h2 img a <>]])
+  (:require-macros [respo.macros :refer [defcomp div pre code span p h1 h2 img a <>]]
+                   [respo-markdown.comp.md-article :refer [h3]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.style :as ui]
@@ -11,8 +12,6 @@
 (defn comp-image [chunk]
   (let [useful (subs chunk 2 (- (count chunk) 1)), [content url] (string/split useful "](")]
     (img {:src url, :alt content})))
-
-(defn h3 [props & children] (create-element :h3 props children))
 
 (defn comp-link [chunk]
   (let [useful (subs chunk 1 (- (count chunk) 1)), [content url] (string/split useful "](")]
