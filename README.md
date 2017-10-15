@@ -28,7 +28,7 @@ Supported features:
 ; returns DSL
 ```
 
-For options `{}`, [`cljsjs.highlight`](https://github.com/cljsjs/packages/tree/master/highlight) is suggested:
+For options `{}`, `highlight.js` is suggested:
 
 ```clojure
 {:highlight (fn [code lang]
