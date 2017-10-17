@@ -18,6 +18,7 @@
                                :preloads [shadow.cljs.devtools.client.hud]}
                     :release {:output-dir "dist/"
                               :module-hash-names true
+                              :build-options {:manifest-name "cljs-manifest.json"}
                               :compiler-options {:externs ["externs/hljs.js"]}}}
           :ssr {:target :node-script
                 :output-to "target/ssr.js"
