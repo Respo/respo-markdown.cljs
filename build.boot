@@ -3,14 +3,14 @@
   (String/valueOf (.readPassword (System/console) guide nil)))
 
 (set-env!
-  :resource-paths #{"src"}
+  :resource-paths #{"src" "polyfill"}
   :dependencies '[[mvc-works/hsl  "0.1.2"]
                   [respo/ui       "0.1.9"]]
   :repositories #(conj % ["clojars" {:url "https://clojars.org/repo/"
                                      :username "jiyinyiyong"
                                      :password (read-password "Clojars password: ")}]))
 
-(def +version+ "0.1.6")
+(def +version+ "0.1.7")
 
 (deftask deploy []
   (comp
