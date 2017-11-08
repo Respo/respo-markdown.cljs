@@ -5,8 +5,7 @@
             [respo-markdown.comp.container :refer [comp-container]]
             [respo-markdown.schema :as schema]))
 
-(def base-info
-  {:title "Markdown", :icon "http://cdn.tiye.me/logo/respo.png", :ssr nil, :inner-html nil})
+(def base-info {:title "Markdown", :icon "http://cdn.tiye.me/logo/respo.png", :ssr nil})
 
 (defn dev-page []
   (make-page

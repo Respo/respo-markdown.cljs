@@ -1,6 +1,6 @@
 
 (ns respo-markdown.comp.md-article
-  (:require-macros [respo.macros :refer [defcomp div pre code span p h1 h2 img a <>]]
+  (:require-macros [respo.macros :refer [defcomp list-> div pre code span p h1 h2 img a <>]]
                    [respo-markdown.comp.md-article :refer [h3]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
@@ -21,8 +21,6 @@
        (code {:inner-text (subs content 1 (dec (count content)))}))
       (a {:href url, :inner-text content, :target "_blank"}))))
 
-(defn blockquote [props & children] (create-element :blockquote props children))
-
 (defn render-inline [text]
   (->> (split-line text)
        (map-indexed
@@ -37,23 +35,22 @@
                :text (<> span content nil)
                (<> span (str "Unknown:" content) nil)))]))))
 
-(defn li [props & children] (create-element :li props children))
-
 (defcomp
  comp-line
  (line)
  (cond
-   (string/starts-with? line "# ") (h1 {} (render-inline (subs line 2)))
-   (string/starts-with? line "## ") (h2 {} (render-inline (subs line 3)))
-   (string/starts-with? line "### ") (h3 {} (render-inline (subs line 4)))
-   (string/starts-with? line "> ") (blockquote {} (render-inline (subs line 2)))
-   (string/starts-with? line "* ") (li {} (render-inline (subs line 2)))
-   :else (div {} (render-inline line))))
+   (string/starts-with? line "# ") (list-> :h1 {} (render-inline (subs line 2)))
+   (string/starts-with? line "## ") (list-> :h2 {} (render-inline (subs line 3)))
+   (string/starts-with? line "### ") (list-> :h3 {} (render-inline (subs line 4)))
+   (string/starts-with? line "> ") (list-> :blockquote {} (render-inline (subs line 2)))
+   (string/starts-with? line "* ") (list-> :li {} (render-inline (subs line 2)))
+   :else (list-> :div {} (render-inline line))))
 
 (defcomp
  comp-text-block
  (lines)
- (div
+ (list->
+  :div
   {:class-name "md-paragraph"}
   (->> lines (map-indexed (fn [idx line] [idx (comp-line line)])))))
 
@@ -76,7 +73,8 @@
  comp-md-article
  (text options)
  (let [blocks (split-block text)]
-   (div
+   (list->
+    :div
     {:class-name "md-article", :style (merge ui/flex style-container)}
     (->> blocks
          (map-indexed
@@ -88,3 +86,7 @@
                  :text (comp-text-block lines)
                  :code (comp-code-block lines options)
                  (<> "Unknown content.")))]))))))
+
+(defn blockquote [props & children] (create-element :blockquote props children))
+
+(defn li [props & children] (create-element :li props children))
