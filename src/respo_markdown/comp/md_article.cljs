@@ -4,10 +4,25 @@
                    [respo-markdown.comp.md-article :refer [h3]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
-            [respo-ui.style :as ui]
+            [respo-ui.core :as ui]
             [respo.core :refer [create-comp create-element]]
             [respo.comp.space :refer [=<]]
             [respo-markdown.util.core :refer [split-block split-line]]))
+
+(defn blockquote [props & children] (create-element :blockquote props children))
+
+(defcomp
+ comp-code-block
+ (lines options)
+ (let [lang (first lines)
+       content (string/join "\n" (rest lines))
+       highlight-fn (:highlight options)]
+   (pre
+    {:class-name "md-code-block"}
+    (code
+     (if (and (not (string/blank? lang)) (fn? highlight-fn))
+       {:innerHTML (highlight-fn content lang)}
+       {:inner-text content})))))
 
 (defn comp-image [chunk]
   (let [useful (subs chunk 2 (- (count chunk) 1)), [content url] (string/split useful "](")]
@@ -57,19 +72,6 @@
 (def style-container {:padding 8})
 
 (defcomp
- comp-code-block
- (lines options)
- (let [lang (first lines)
-       content (string/join "\n" (rest lines))
-       highlight-fn (:highlight options)]
-   (pre
-    {:class-name "md-code-block"}
-    (code
-     (if (and (not (string/blank? lang)) (fn? highlight-fn))
-       {:innerHTML (highlight-fn content lang)}
-       {:inner-text content})))))
-
-(defcomp
  comp-md-article
  (text options)
  (let [blocks (split-block text)]
@@ -86,7 +88,5 @@
                  :text (comp-text-block lines)
                  :code (comp-code-block lines options)
                  (<> "Unknown content.")))]))))))
-
-(defn blockquote [props & children] (create-element :blockquote props children))
 
 (defn li [props & children] (create-element :li props children))

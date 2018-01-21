@@ -2,16 +2,16 @@
 (ns respo-markdown.comp.container
   (:require-macros [respo.macros :refer [defcomp <> div span textarea]])
   (:require [hsl.core :refer [hsl]]
-            [respo-ui.style :as ui]
+            [respo-ui.core :as ui]
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]
             [respo-markdown.comp.md-article :refer [comp-md-article]]))
 
+(def initial-state {:draft ""})
+
 (def style-container {:align-items :stretch})
 
 (def style-text {})
-
-(def initial-state {:draft ""})
 
 (defcomp
  comp-container

@@ -12,8 +12,6 @@
   (let [next-store (if (= op :states) (update @*store :states (mutate op-data)) @*store)]
     (reset! *store next-store)))
 
-(def mount-target (.querySelector js/document ".app"))
-
 (defn highligher [code lang]
   (try
    (let [result (.highlight js/hljs lang code)]
@@ -21,10 +19,10 @@
      (.-value result))
    (catch js/Error e (.error js/console e) (str "<code>" code "</code>"))))
 
+(def mount-target (.querySelector js/document ".app"))
+
 (defn render-app! [renderer]
   (renderer mount-target (comp-container @*store highligher) dispatch!))
-
-(defn reload! [] (clear-cache!) (render-app! render!) (println "Code update."))
 
 (def ssr? (some? (.querySelector js/document "meta.respo-ssr")))
 
@@ -33,5 +31,7 @@
   (render-app! render!)
   (add-watch *store :changes (fn [] (render-app! render!)))
   (println "App started!"))
+
+(defn reload! [] (clear-cache!) (render-app! render!) (println "Code update."))
 
 (set! (.-onload js/window) main!)
