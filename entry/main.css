@@ -1,5 +1,5 @@
 
-@import url(~highlight.js/styles/dark.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dark.min.css);
 
 body {
   margin: 0;

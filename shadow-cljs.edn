@@ -1,25 +1,22 @@
 
-{:source-paths ["src" "polyfill"]
+{:source-paths ["src" "polyfill" "cli"]
  :dependencies [[mvc-works/hsl          "0.1.2"]
-                [mvc-works/shell-page   "0.1.6"]
                 [mvc-works/verbosely    "0.1.2"]
-                [respo/ui               "0.3.1"]
-                [respo                  "0.8.12"]]
+                [mvc-works/shell-page   "0.1.7"]
+                [respo                  "0.8.15"]
+                [respo/ui               "0.3.2"]]
  :open-file-command ["subl" ["%s:%s:%s" :file :line :column]]
  :builds {:browser {:target :browser
-                    :output-dir "target/browser"
-                    :asset-path "/browser"
-                    :modules {:main {:entries [respo-markdown.main]
-                                     :depends-on #{:lib}}
-                              :lib {:entries [respo.core respo.macros
-                                              respo.comp.inspect]}}
+                    :output-dir "target/"
+                    :asset-path "./"
+                    :modules {:main {:entries [respo-markdown.main]}}
                     :devtools {:after-load respo-markdown.main/reload!
                                :preloads [shadow.cljs.devtools.client.hud]
                                :http-root "target"
-                               :http-port 8081}
+                               :http-port 7000}
                     :release {:output-dir "dist/"
-                              :module-hash-names true
-                              :build-options {:manifest-name "cljs-manifest.json"}
+                              :module-hash-names 8
+                              :build-options {:manifest-name "assets.edn"}
                               :compiler-options {:externs ["externs/hljs.js"]}}}
           :ssr {:target :node-script
                 :output-to "target/ssr.js"

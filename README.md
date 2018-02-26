@@ -56,7 +56,7 @@ Write your own CSS to style the HTML:
 
 ### Develop
 
-Workflow https://github.com/mvc-works/coworkflow
+Workflow https://github.com/mvc-works/calcit-workflow
 
 ### License
 

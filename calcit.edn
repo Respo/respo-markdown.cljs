@@ -2276,6 +2276,21 @@
           "v" {:type :leaf, :text "schema", :id "SJXzBUfT9Z", :by "root", :at 1505728061885}
          }
         }
+        "y" {
+         :type :expr, :by "root", :at 1519612585730, :id "B1MhGgWdz"
+         :data {
+          "T" {:type :leaf, :by "root", :at 1519612586164, :text "[]", :id "B1MhGgWdzleaf"}
+          "j" {:type :leaf, :by "root", :at 1519612588249, :text "cljs.reader", :id "SJzGnflWOf"}
+          "r" {:type :leaf, :by "root", :at 1519612588897, :text ":refer", :id "ByPN3fe-OG"}
+          "v" {
+           :type :expr, :by "root", :at 1519612589072, :id "SkHr3MgZdz"
+           :data {
+            "T" {:type :leaf, :by "root", :at 1519612589241, :text "[]", :id "ryNH3zeW_G"}
+            "j" {:type :leaf, :by "root", :at 1519612591961, :text "read-string", :id "BydBnGg-OM"}
+           }
+          }
+         }
+        }
        }
       }
      }
@@ -2361,9 +2376,7 @@
                  "b" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", :id "S1jLVUJ3Z", :by "root", :at 1506923604776}
                  "f" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js", :id "B14PVLyhW", :by "root", :at 1506923612985}
                  "h" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js", :id "HyowEUJhW", :by "root", :at 1506923620223}
-                 "j" {:type :leaf, :text "|/main.js", :id "rk9cLfa9W", :by "root", :at 1505728147973}
-                 "r" {:type :leaf, :text "|/browser/lib.js", :id "S1fh9LfpcZ", :by "root", :at 1505728155417}
-                 "v" {:type :leaf, :text "|/browser/main.js", :id "BJVsLGT9-", :by "root", :at 1505728163245}
+                 "v" {:type :leaf, :text "|/main.js", :id "BJVsLGT9-", :by "root", :at 1519612223583}
                 }
                }
               }
@@ -2552,40 +2565,19 @@
              }
             }
            }
-           "j" {
-            :type :expr, :id "By0yDGacZ", :by "root", :at 1505728229622
-            :data {
-             "T" {:type :leaf, :text "webpack-info", :id "By0yDGacZleaf", :by "root", :at 1508258001585}
-             "j" {
-              :type :expr, :id "Syfevzpc-", :by "root", :at 1505728233662
-              :data {
-               "T" {:type :leaf, :text ".parse", :id "By-eDMa5W", :by "root", :at 1505728234526}
-               "j" {:type :leaf, :text "js/JSON", :id "BJlQxwMT9-", :by "root", :at 1505728237331}
-               "r" {
-                :type :expr, :id "SylLxvza5W", :by "root", :at 1505728237829
-                :data {
-                 "T" {:type :leaf, :text "slurp", :id "ry8ewM6c-", :by "root", :at 1505728239286}
-                 "j" {:type :leaf, :text "|dist/webpack-manifest.json", :id "rkOeDMT9Z", :by "root", :at 1508257995011}
-                }
-               }
-              }
-             }
-            }
-           }
            "r" {
             :type :expr, :id "S1NZwfa9Z", :by "root", :at 1505728251679
             :data {
-             "T" {:type :leaf, :text "cljs-info", :id "S1NZwfa9Zleaf", :by "root", :at 1508258003400}
+             "T" {:type :leaf, :text "assets", :id "S1NZwfa9Zleaf", :by "root", :at 1519612414151}
              "j" {
               :type :expr, :id "Skl_-wza5Z", :by "root", :at 1505728256232
               :data {
-               "T" {:type :leaf, :text ".parse", :id "B1_bPMT5b", :by "root", :at 1505728257072}
-               "j" {:type :leaf, :text "js/JSON", :id "HyW5bwMTc-", :by "root", :at 1505728259412}
+               "T" {:type :leaf, :text "read-string", :id "B1_bPMT5b", :by "root", :at 1519612582789}
                "r" {
                 :type :expr, :id "rklhbDMT5b", :by "root", :at 1505728259844
                 :data {
                  "T" {:type :leaf, :text "slurp", :id "Sk3-vG6cb", :by "root", :at 1505728261942}
-                 "j" {:type :leaf, :text "|dist/cljs-manifest.json", :id "SykfvzpcW", :by "root", :at 1508257997019}
+                 "j" {:type :leaf, :text "|dist/assets.edn", :id "SykfvzpcW", :by "root", :at 1519612360501}
                 }
                }
               }
@@ -2657,20 +2649,6 @@
                   :type :expr, :id "rkbQQvzpqb", :by "root", :at 1505728283450
                   :data {
                    "T" {:type :leaf, :text "[]", :id "rJxmQvG6qb", :by "root", :at 1505728283675}
-                   "j" {
-                    :type :expr, :id "Hyea6NDynW", :by "root", :at 1506927813412
-                    :data {
-                     "D" {:type :leaf, :text "prefix-cdn", :id "HyRaNPkn-", :by "root", :at 1506927816835}
-                     "T" {
-                      :type :expr, :id "Ske87Pz65Z", :by "root", :at 1505728286398
-                      :data {
-                       "T" {:type :leaf, :text "aget", :id "SyBmwf69b", :by "root", :at 1505728287147}
-                       "j" {:type :leaf, :text "webpack-info", :id "r1dQvGTqW", :by "root", :at 1508258023345}
-                       "r" {:type :leaf, :text "|main.css", :id "B17tmvMac-", :by "root", :at 1505728294432}
-                      }
-                     }
-                    }
-                   }
                   }
                  }
                 }
@@ -2680,64 +2658,33 @@
                 :data {
                  "T" {:type :leaf, :text ":scripts", :id "B1lG4Dzp9-leaf", :by "root", :at 1505728299996}
                  "j" {
-                  :type :expr, :id "BklHEPG69-", :by "root", :at 1505728301086
+                  :type :expr, :by "root", :at 1519612420913, :id "Sypbfg-_z"
                   :data {
-                   "T" {:type :leaf, :text "[]", :id "B1SNvG6c-", :by "root", :at 1505728301611}
-                   "b" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", :id "S1jLVUJ3Z", :by "root", :at 1506923604776}
-                   "f" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js", :id "B14PVLyhW", :by "root", :at 1506923612985}
-                   "h" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js", :id "HyowEUJhW", :by "root", :at 1506923620223}
-                   "r" {
-                    :type :expr, :id "rklodB5k2b", :by "root", :at 1506940274702
+                   "D" {:type :leaf, :by "root", :at 1519612423068, :text "concat", :id "r1xpZMxZdG"}
+                   "T" {
+                    :type :expr, :id "BklHEPG69-", :by "root", :at 1505728301086
                     :data {
-                     "D" {:type :leaf, :text "prefix-cdn", :id "B1boOSck3-", :by "root", :at 1506940276459}
-                     "T" {
-                      :type :expr, :id "ByR4wM6qW", :by "root", :at 1505728309640
-                      :data {
-                       "T" {:type :leaf, :text "->", :id "ByR4wM6qWleaf", :by "root", :at 1505728310253}
-                       "j" {:type :leaf, :text "cljs-info", :id "SJkHvf69-", :by "root", :at 1508258008730}
-                       "r" {
-                        :type :expr, :id "ByeESPGpcZ", :by "root", :at 1505728316200
-                        :data {
-                         "T" {:type :leaf, :text "aget", :id "SyEHvGp9W", :by "root", :at 1505728317101}
-                         "j" {:type :leaf, :text "0", :id "SymHHvMp5Z", :by "root", :at 1505728318037}
-                        }
-                       }
-                       "v" {
-                        :type :expr, :id "S1wSDza9b", :by "root", :at 1505728318682
-                        :data {
-                         "T" {:type :leaf, :text "aget", :id "S1wSDza9bleaf", :by "root", :at 1505728319732}
-                         "j" {:type :leaf, :text "|js-name", :id "ByWOHPzpqW", :by "root", :at 1505728321856}
-                        }
-                       }
-                      }
-                     }
+                     "T" {:type :leaf, :text "[]", :id "B1SNvG6c-", :by "root", :at 1505728301611}
+                     "b" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", :id "S1jLVUJ3Z", :by "root", :at 1506923604776}
+                     "f" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js", :id "B14PVLyhW", :by "root", :at 1506923612985}
+                     "h" {:type :leaf, :text "|https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js", :id "HyowEUJhW", :by "root", :at 1506923620223}
                     }
                    }
-                   "v" {
-                    :type :expr, :id "SJeadH5y3-", :by "root", :at 1506940277448
+                   "j" {
+                    :type :expr, :by "root", :at 1519612429744, :id "HJxUMGxW_M"
                     :data {
-                     "D" {:type :leaf, :text "prefix-cdn", :id "HJC_B91h-", :by "root", :at 1506940279116}
-                     "T" {
-                      :type :expr, :id "HJZ6HPM69-", :by "root", :at 1505728309640
+                     "T" {:type :leaf, :by "root", :at 1519612432300, :text "map", :id "HJxUMGxW_Mleaf"}
+                     "j" {
+                      :type :expr, :by "root", :at 1519612433120, :id "BJlKGfeZuM"
                       :data {
-                       "T" {:type :leaf, :text "->", :id "ByR4wM6qWleaf", :by "root", :at 1505728310253}
-                       "j" {:type :leaf, :text "cljs-info", :id "SJkHvf69-", :by "root", :at 1508258012994}
-                       "r" {
-                        :type :expr, :id "ByeESPGpcZ", :by "root", :at 1505728316200
-                        :data {
-                         "T" {:type :leaf, :text "aget", :id "SyEHvGp9W", :by "root", :at 1505728317101}
-                         "j" {:type :leaf, :text "1", :id "SymHHvMp5Z", :by "root", :at 1505728330988}
-                        }
-                       }
-                       "v" {
-                        :type :expr, :id "S1wSDza9b", :by "root", :at 1505728318682
-                        :data {
-                         "T" {:type :leaf, :text "aget", :id "S1wSDza9bleaf", :by "root", :at 1505728319732}
-                         "j" {:type :leaf, :text "|js-name", :id "ByWOHPzpqW", :by "root", :at 1505728321856}
-                        }
-                       }
+                       "T" {:type :leaf, :by "root", :at 1519612434746, :text "#()", :id "SyYMzlZ_z"}
+                       "j" {:type :leaf, :by "root", :at 1519612437664, :text "->", :id "BJZiffe-OG"}
+                       "n" {:type :leaf, :by "root", :at 1519612450112, :text "%", :id "BJeK7MeZ_G"}
+                       "r" {:type :leaf, :by "root", :at 1519612440913, :text ":output-name", :id "rkgRGzeZuG"}
+                       "v" {:type :leaf, :by "root", :at 1519612445788, :text "prefix-cdn", :id "H1zbXfxbOM"}
                       }
                      }
+                     "r" {:type :leaf, :by "root", :at 1519612454321, :text "assets", :id "B1xi7fe-uz"}
                     }
                    }
                   }
