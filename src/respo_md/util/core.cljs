@@ -1,5 +1,5 @@
 
-(ns respo-markdown.util.core
+(ns respo-md.util.core
   (:require [clojure.string :as string] [cljs.reader :refer [read-string]]))
 
 (defn split-block

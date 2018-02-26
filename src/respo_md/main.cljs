@@ -1,9 +1,9 @@
 
-(ns respo-markdown.main
+(ns respo-md.main
   (:require [respo.core :refer [render! clear-cache! realize-ssr!]]
-            [respo-markdown.comp.container :refer [comp-container]]
+            [respo-md.comp.container :refer [comp-container]]
             [cljs.reader :refer [read-string]]
-            [respo-markdown.schema :as schema]
+            [respo-md.schema :as schema]
             [respo.cursor :refer [mutate]]))
 
 (defonce *store (atom schema/store))

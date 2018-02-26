@@ -1,13 +1,13 @@
 
-(ns respo-markdown.comp.md-article
+(ns respo-md.comp.md
   (:require-macros [respo.macros :refer [defcomp list-> div pre code span p h1 h2 img a <>]]
-                   [respo-markdown.comp.md-article :refer [h3]])
+                   [respo-md.comp.md :refer [h3]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.core :as ui]
             [respo.core :refer [create-comp create-element]]
             [respo.comp.space :refer [=<]]
-            [respo-markdown.util.core :refer [split-block split-line]]))
+            [respo-md.util.core :refer [split-block split-line]]))
 
 (defn blockquote [props & children] (create-element :blockquote props children))
 
@@ -69,15 +69,29 @@
   {:class-name "md-paragraph"}
   (->> lines (map-indexed (fn [idx line] [idx (comp-line line)])))))
 
-(def style-container {:padding 8})
+(defn comp-md [text options]
+  (let [blocks (split-block text)]
+    (list->
+     :span
+     {:class-name "md-span", :style (merge ui/flex (:style options))}
+     (->> blocks
+          (map-indexed
+           (fn [idx block]
+             [idx
+              (let [[mode lines] block]
+                (<> (pr-str mode))
+                (case mode
+                  :text (comp-text-block lines)
+                  :code (comp-code-block lines options)
+                  (<> "Unknown content.")))]))))))
 
 (defcomp
- comp-md-article
+ comp-md-block
  (text options)
  (let [blocks (split-block text)]
    (list->
     :div
-    {:class-name "md-article", :style (merge ui/flex style-container)}
+    {:class-name "md-block", :style (merge ui/flex (:style options))}
     (->> blocks
          (map-indexed
           (fn [idx block]

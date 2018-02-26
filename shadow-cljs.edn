@@ -9,8 +9,8 @@
  :builds {:browser {:target :browser
                     :output-dir "target/"
                     :asset-path "./"
-                    :modules {:main {:entries [respo-markdown.main]}}
-                    :devtools {:after-load respo-markdown.main/reload!
+                    :modules {:main {:entries [respo-md.main]}}
+                    :devtools {:after-load respo-md.main/reload!
                                :preloads [shadow.cljs.devtools.client.hud]
                                :http-root "target"
                                :http-port 7000}
@@ -20,5 +20,5 @@
                               :compiler-options {:externs ["externs/hljs.js"]}}}
           :ssr {:target :node-script
                 :output-to "target/ssr.js"
-                :main respo-markdown.render/main!
-                :devtools {:after-load respo-markdown.render/main!}}}}
+                :main respo-md.render/main!
+                :devtools {:after-load respo-md.render/main!}}}}

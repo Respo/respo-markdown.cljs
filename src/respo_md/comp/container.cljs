@@ -1,11 +1,11 @@
 
-(ns respo-markdown.comp.container
+(ns respo-md.comp.container
   (:require-macros [respo.macros :refer [defcomp <> div span textarea]])
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]
-            [respo-markdown.comp.md-article :refer [comp-md-article]]))
+            [respo-md.comp.md :refer [comp-md comp-md-block]]))
 
 (def initial-state {:draft ""})
 
@@ -26,4 +26,4 @@
       :on {:input (fn [e dispatch! mutate!]
              (println "Editing:" state (:value e))
              (mutate! (assoc state :draft (:value e))))}})
-    (comp-md-article (:draft state) {:highlight highlighter}))))
+    (comp-md-block (:draft state) {:highlight highlighter}))))

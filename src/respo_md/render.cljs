@@ -1,9 +1,9 @@
 
-(ns respo-markdown.render
+(ns respo-md.render
   (:require [respo.render.html :refer [make-string]]
             [shell-page.core :refer [make-page spit slurp]]
-            [respo-markdown.comp.container :refer [comp-container]]
-            [respo-markdown.schema :as schema]
+            [respo-md.comp.container :refer [comp-container]]
+            [respo-md.schema :as schema]
             [cljs.reader :refer [read-string]]))
 
 (def base-info {:title "Markdown", :icon "http://cdn.tiye.me/logo/respo.png", :ssr nil})
@@ -31,7 +31,7 @@
 (defn prod-page []
   (let [html-content (make-string (comp-container schema/store highligher))
         assets (read-string (slurp "dist/assets.edn"))
-        cdn (if preview? "" " http://cdn.tiye.me/respo-markdown/")
+        cdn (if preview? "" " http://cdn.tiye.me/respo-md/")
         prefix-cdn (fn [x] (str cdn x))]
     (make-page
      html-content

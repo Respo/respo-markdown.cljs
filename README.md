@@ -24,8 +24,9 @@ Supported features:
 ```
 
 ```clojure
-(respo-markdown.comp.md-article/comp-md-article "a\n" {})
+(respo-md.comp.md/comp-md "a" {})
 ; returns DSL
+(respo-md.comp.md/comp-md-block "a\n" {})
 ```
 
 For options `{}`, `highlight.js` is suggested:
@@ -34,13 +35,16 @@ For options `{}`, `highlight.js` is suggested:
 {:highlight (fn [code lang]
    (let [result (.highlight js/hljs lang code)]
      (comment .log js/console "Result" result code lang js/hljs)
-     (.-value result)))}
+     (.-value result)))
+ :style {}}
 ```
 
 Write your own CSS to style the HTML:
 
 ```css
-.md-article {}
+.md-block {}
+
+.md-span {}
 
 .md-paragraph {
   margin: 16px 0;
