@@ -19,6 +19,8 @@ Supported features:
 
 ### Usage
 
+[![Clojars Project](https://img.shields.io/clojars/v/respo/markdown.svg)](https://clojars.org/respo/markdown)
+
 ```clojure
 [respo/markdown "0.2.0"]
 ```
