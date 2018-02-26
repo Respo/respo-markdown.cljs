@@ -1,13 +1,13 @@
 
 (ns respo-md.comp.md
-  (:require-macros [respo.macros :refer [defcomp list-> div pre code span p h1 h2 img a <>]]
-                   [respo-md.comp.md :refer [h3]])
+  (:require-macros [respo-md.comp.md :refer [h3]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.core :as ui]
             [respo.core :refer [create-comp create-element]]
             [respo.comp.space :refer [=<]]
-            [respo-md.util.core :refer [split-block split-line]]))
+            [respo-md.util.core :refer [split-block split-line]]
+            [respo.macros :refer [defcomp list-> div pre code span p h1 h2 img a <>]]))
 
 (defn blockquote [props & children] (create-element :blockquote props children))
 

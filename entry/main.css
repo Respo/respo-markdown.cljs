@@ -16,4 +16,5 @@ body * {
   background-color: hsl(300, 80%, 20%);
   padding: 8px;
   display: block;
+  line-height: 1.5em;
 }

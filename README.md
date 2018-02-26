@@ -34,7 +34,7 @@ For options `{}`, `highlight.js` is suggested:
 
 ```clojure
 {:highlight (fn [code lang]
-   (let [result (.highlight js/hljs lang code)]
+   (let [result (.highlight hljs lang code)]
      (comment .log js/console "Result" result code lang js/hljs)
      (.-value result)))
  :style {}}
@@ -56,6 +56,7 @@ Write your own CSS to style the HTML:
   background-color: hsl(300, 80%, 20%);
   padding: 8px;
   display: block;
+  line-height: 1.5em;
 }
 ```
 
