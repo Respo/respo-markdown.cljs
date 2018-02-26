@@ -61,7 +61,7 @@
    (string/starts-with? line "* ") (list-> :li {} (render-inline (subs line 2)))
    :else (list-> :div {} (render-inline line))))
 
-(defcomp comp-md (text) (render-inline text))
+(defcomp comp-md (text) (list-> :span {} (render-inline text)))
 
 (defcomp
  comp-text-block
@@ -77,7 +77,7 @@
  (let [blocks (split-block text)]
    (list->
     :div
-    {:class-name "md-block", :style (merge ui/flex (:style options))}
+    {:class-name "md-block", :style (:style options)}
     (->> blocks
          (map-indexed
           (fn [idx block]
