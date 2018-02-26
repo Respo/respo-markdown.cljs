@@ -24,9 +24,10 @@ Supported features:
 ```
 
 ```clojure
-(respo-md.comp.md/comp-md "a" {})
-; returns DSL
 (respo-md.comp.md/comp-md-block "a\n" {})
+; returns DSL
+(respo-md.comp.md/comp-md "text inline")
+; render inline DOM elements
 ```
 
 For options `{}`, `highlight.js` is suggested:
@@ -46,7 +47,7 @@ Write your own CSS to style the HTML:
 
 .md-span {}
 
-.md-paragraph {
+.md-p {
   margin: 16px 0;
 }
 

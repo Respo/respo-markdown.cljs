@@ -61,29 +61,15 @@
    (string/starts-with? line "* ") (list-> :li {} (render-inline (subs line 2)))
    :else (list-> :div {} (render-inline line))))
 
+(defcomp comp-md (text) (render-inline text))
+
 (defcomp
  comp-text-block
  (lines)
  (list->
   :div
-  {:class-name "md-paragraph"}
+  {:class-name "md-p"}
   (->> lines (map-indexed (fn [idx line] [idx (comp-line line)])))))
-
-(defn comp-md [text options]
-  (let [blocks (split-block text)]
-    (list->
-     :span
-     {:class-name "md-span", :style (merge ui/flex (:style options))}
-     (->> blocks
-          (map-indexed
-           (fn [idx block]
-             [idx
-              (let [[mode lines] block]
-                (<> (pr-str mode))
-                (case mode
-                  :text (comp-text-block lines)
-                  :code (comp-code-block lines options)
-                  (<> "Unknown content.")))]))))))
 
 (defcomp
  comp-md-block
