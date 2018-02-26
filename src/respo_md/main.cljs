@@ -4,7 +4,10 @@
             [respo-md.comp.container :refer [comp-container]]
             [cljs.reader :refer [read-string]]
             [respo-md.schema :as schema]
-            [respo.cursor :refer [mutate]]))
+            [respo.cursor :refer [mutate]]
+            ["highlight.js/lib/highlight" :as hljs]
+            ["highlight.js/lib/languages/clojure" :as clojure-lang]
+            ["highlight.js/lib/languages/bash" :as bash-lang]))
 
 (defonce *store (atom schema/store))
 
@@ -14,7 +17,7 @@
 
 (defn highligher [code lang]
   (try
-   (let [result (.highlight js/hljs lang code)]
+   (let [result (.highlight hljs lang code)]
      (comment .log js/console "Result" result code lang js/hljs)
      (.-value result))
    (catch js/Error e (.error js/console e) (str "<code>" code "</code>"))))
@@ -27,6 +30,8 @@
 (def ssr? (some? (.querySelector js/document "meta.respo-ssr")))
 
 (defn main! []
+  (.registerLanguage hljs "clojure" clojure-lang)
+  (.registerLanguage hljs "bash" bash-lang)
   (if ssr? (render-app! realize-ssr!))
   (render-app! render!)
   (add-watch *store :changes (fn [] (render-app! render!)))

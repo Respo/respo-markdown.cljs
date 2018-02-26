@@ -4,22 +4,17 @@
             [shell-page.core :refer [make-page spit slurp]]
             [respo-md.comp.container :refer [comp-container]]
             [respo-md.schema :as schema]
-            [cljs.reader :refer [read-string]]))
+            [cljs.reader :refer [read-string]]
+            ["highlight.js" :as hljs]))
 
-(def base-info {:title "Markdown", :icon "http://cdn.tiye.me/logo/respo.png", :ssr nil})
+(def base-info
+  {:title "Markdown",
+   :icon "http://cdn.tiye.me/logo/respo.png",
+   :inline-styles [(slurp "./node_modules/highlight.js/styles/dark.css")
+                   (slurp "./entry/main.css")],
+   :ssr nil})
 
-(defn dev-page []
-  (make-page
-   ""
-   (merge
-    base-info
-    {:styles [],
-     :scripts ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
-               "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"
-               "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"
-               "/main.js"]})))
-
-(def hljs (js/require "highlight.js"))
+(defn dev-page [] (make-page "" (merge base-info {:styles [], :scripts ["/main.js"]})))
 
 (defn highligher [code lang]
   (let [result (.highlight hljs lang code)]
@@ -37,13 +32,7 @@
      html-content
      (merge
       base-info
-      {:styles [],
-       :scripts (concat
-                 ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
-                  "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/clojure.min.js"
-                  "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"]
-                 (map #(-> % :output-name prefix-cdn) assets)),
-       :ssr "respo-ssr"}))))
+      {:styles [], :scripts (map #(-> % :output-name prefix-cdn) assets), :ssr "respo-ssr"}))))
 
 (defn main! []
   (if (= js/process.env.env "dev")
