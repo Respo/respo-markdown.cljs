@@ -39,7 +39,9 @@ For options `{}`, `highlight.js` is suggested:
    (let [result (.highlight hljs lang code)]
      (comment .log js/console "Result" result code lang js/hljs)
      (.-value result)))
- :style {}}
+ :style {}
+ :css ".md-p {}"
+ :class-name "demo"}
 ```
 
 Write your own CSS to style the HTML:
