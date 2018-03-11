@@ -26,7 +26,7 @@
 (defn prod-page []
   (let [html-content (make-string (comp-container schema/store highligher))
         assets (read-string (slurp "dist/assets.edn"))
-        cdn (if preview? "" " http://cdn.tiye.me/respo-md/")
+        cdn (if preview? "" " http://cdn.tiye.me/respo-markdown/")
         prefix-cdn (fn [x] (str cdn x))]
     (make-page
      html-content

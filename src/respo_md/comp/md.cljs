@@ -7,7 +7,8 @@
             [respo.core :refer [create-comp create-element]]
             [respo.comp.space :refer [=<]]
             [respo-md.util.core :refer [split-block split-line]]
-            [respo.macros :refer [defcomp list-> div pre code span p h1 h2 img a <>]]))
+            [respo.macros :refer [defcomp list-> div pre code span p h1 h2 img a <> style]]
+            [respo.util.list :refer [map-with-idx]]))
 
 (defn blockquote [props & children] (create-element :blockquote props children))
 
@@ -66,27 +67,28 @@
 (defcomp
  comp-text-block
  (lines)
- (list->
-  :div
-  {:class-name "md-p"}
-  (->> lines (map-indexed (fn [idx line] [idx (comp-line line)])))))
+ (list-> :div {:class-name "md-p"} (->> lines (map-with-idx (fn [line] (comp-line line))))))
 
 (defcomp
  comp-md-block
  (text options)
- (let [blocks (split-block text)]
+ (let [blocks (split-block text), css (:css options), class-name (:class-name options)]
    (list->
     :div
-    {:class-name "md-block", :style (:style options)}
-    (->> blocks
-         (map-indexed
-          (fn [idx block]
-            [idx
-             (let [[mode lines] block]
-               (<> (pr-str mode))
-               (case mode
-                 :text (comp-text-block lines)
-                 :code (comp-code-block lines options)
-                 (<> "Unknown content.")))]))))))
+    {:class-name (if (nil? class-name) "md-block" (str "md-block " class-name)),
+     :style (:style options)}
+    (let [css (:css options)
+          p-elements (->> blocks
+                          (map-with-idx
+                           (fn [block]
+                             (let [[mode lines] block]
+                               (<> (pr-str mode))
+                               (case mode
+                                 :text (comp-text-block lines)
+                                 :code (comp-code-block lines options)
+                                 (<> "Unknown content."))))))]
+      (if (nil? css)
+        p-elements
+        (cons [-1 (style {:inner-text css, :scoped true})] p-elements))))))
 
 (defn li [props & children] (create-element :li props children))

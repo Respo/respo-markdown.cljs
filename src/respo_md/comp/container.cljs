@@ -47,4 +47,8 @@
                (mutate! (assoc state :draft (:value e))))}}))
      (div
       {:style (merge ui/flex {:padding 8})}
-      (comp-md-block (:draft state) {:highlight highlighter}))))))
+      (comp-md-block
+       (:draft state)
+       {:highlight highlighter,
+        :css ".md-p code {\n  background-color: #edf;\n  padding: 0 8px;\n}",
+        :class-name "demo"}))))))

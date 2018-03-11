@@ -1,7 +1,7 @@
 {
   "name": "respo-markdown",
   "version": "0.1.0",
-  "description": "Stack Workflow",
+  "description": "Markdown library being friendly to Respo",
   "main": "index.js",
   "scripts": {
     "watch": "shadow-cljs watch browser",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "http-server": "^0.11.1",
-    "shadow-cljs": "^2.1.26"
+    "shadow-cljs": "^2.2.7"
   },
   "dependencies": {
     "highlight.js": "^9.12.0"
