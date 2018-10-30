@@ -5,7 +5,7 @@
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]
             [respo-md.comp.md :refer [comp-md comp-md-block]]
-            [respo.macros :refer [defcomp mutation-> <> div span textarea input a]]))
+            [respo.core :refer [defcomp mutation-> <> div span textarea input a]]))
 
 (def initial-state {:draft "", :text ""})
 

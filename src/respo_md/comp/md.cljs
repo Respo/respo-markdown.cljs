@@ -7,7 +7,7 @@
             [respo.core :refer [create-comp create-element]]
             [respo.comp.space :refer [=<]]
             [respo-md.util.core :refer [split-block split-line]]
-            [respo.macros :refer [defcomp list-> div pre code span p h1 h2 img a <> style]]
+            [respo.core :refer [defcomp list-> div pre code span p h1 h2 img a <> style]]
             [respo.util.list :refer [map-with-idx]]))
 
 (defn blockquote [props & children] (create-element :blockquote props children))
