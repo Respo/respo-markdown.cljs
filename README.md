@@ -22,7 +22,7 @@ Supported features:
 [![Clojars Project](https://img.shields.io/clojars/v/respo/markdown.svg)](https://clojars.org/respo/markdown)
 
 ```clojure
-[respo/markdown "0.2.3"]
+[respo/markdown "0.2.4"]
 ```
 
 ```clojure
