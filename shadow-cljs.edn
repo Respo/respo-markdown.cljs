@@ -2,7 +2,7 @@
 {:source-paths ["src" "polyfill" "cli"]
  :dependencies [[mvc-works/hsl          "0.1.2"]
                 [mvc-works/shell-page   "0.1.9"]
-                [respo                  "0.9.1"]
+                [respo                  "0.9.2"]
                 [respo/ui               "0.3.9"]]
  :open-file-command ["subl" ["%s:%s:%s" :file :line :column]]
  :builds {:browser {:target :browser
