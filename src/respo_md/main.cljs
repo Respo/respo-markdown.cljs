@@ -7,7 +7,8 @@
             [respo.cursor :refer [mutate]]
             ["highlight.js/lib/highlight" :as hljs]
             ["highlight.js/lib/languages/clojure" :as clojure-lang]
-            ["highlight.js/lib/languages/bash" :as bash-lang]))
+            ["highlight.js/lib/languages/bash" :as bash-lang]
+            [respo-md.config :as config]))
 
 (defonce *store (atom schema/store))
 
@@ -30,6 +31,7 @@
 (def ssr? (some? (.querySelector js/document "meta.respo-ssr")))
 
 (defn main! []
+  (println "Running mode:" (if config/dev? "dev" "release"))
   (.registerLanguage hljs "clojure" clojure-lang)
   (.registerLanguage hljs "bash" bash-lang)
   (if ssr? (render-app! realize-ssr!))
