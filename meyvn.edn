@@ -1,7 +1,7 @@
 
 {:pom {:group-id "respo",
        :artifact-id "markdown",
-       :version "0.2.5-a1",
+       :version "0.2.5",
        :name "Respo Markdown converter"}
  :packaging {:jar {:enabled true
                    :remote-repository {:id "clojars"
