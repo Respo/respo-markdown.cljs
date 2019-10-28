@@ -1,4 +1,8 @@
 {
+ :users {
+  "root" {:id "root", :name "root", :nickname "root", :password "d41d8cd98f00b204e9800998ecf8427e", :avatar nil, :theme :star-trail}
+  "wA2nX3K2f" {:name "chen", :id "wA2nX3K2f", :nickname "chen", :avatar nil, :password "d41d8cd98f00b204e9800998ecf8427e", :theme :star-trail}
+ }
  :ir {
   :package "respo-md"
   :files {
@@ -4521,14 +4525,5 @@
    }
   }
  }
- :sessions {}
- :users {
-  "root" {:id "root", :name "root", :nickname "root", :password "d41d8cd98f00b204e9800998ecf8427e", :avatar nil, :theme :star-trail}
- }
- :saved-files {}
  :configs {:storage-key "calcit.edn", :extension ".cljs", :output "src", :port 6001}
- :repl {
-  :alive? false
-  :logs {}
- }
 }

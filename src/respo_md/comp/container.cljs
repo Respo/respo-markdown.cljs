@@ -2,7 +2,6 @@
 (ns respo-md.comp.container
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]
             [respo-md.comp.md :refer [comp-md comp-md-block]]
             [respo.core :refer [defcomp mutation-> <> div span textarea input a]]))

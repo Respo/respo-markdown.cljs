@@ -4,7 +4,7 @@
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.core :as ui]
-            [respo.core :refer [create-comp create-element]]
+            [respo.core :refer [create-element]]
             [respo.comp.space :refer [=<]]
             [respo-md.util.core :refer [split-block split-line]]
             [respo.core :refer [defcomp list-> div pre code span p h1 h2 img a <> style]]
