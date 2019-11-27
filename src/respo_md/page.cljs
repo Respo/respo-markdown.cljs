@@ -22,13 +22,13 @@
      :scripts ["/client.js"],
      :inline-styles [(slurp "./node_modules/highlight.js/styles/dark.css")]})))
 
-(defn highligher [code lang]
+(defn highlighter [code lang]
   (let [result (.highlight hljs lang code)]
     (comment .log js/console "Result" result code lang hljs)
     (.-value result)))
 
 (defn prod-page []
-  (let [html-content (make-string (comp-container schema/store highligher))
+  (let [html-content (make-string (comp-container schema/store highlighter))
         assets (read-string (slurp "dist/assets.edn"))
         cdn (if config/cdn? (:cdn-url config/site) "")
         prefix-cdn (fn [x] (str cdn x))]
