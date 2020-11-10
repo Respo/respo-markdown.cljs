@@ -9,7 +9,7 @@ Demo http://repo.respo-mvc.org/markdown/
 Supported features:
 
 * Code block
-* Headers, h1, h2, h3
+* Headers, h1, h2, h3, h4
 * Quoteblock
 * Unordered list
 * Inline code

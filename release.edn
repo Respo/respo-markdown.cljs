@@ -1,0 +1,6 @@
+{:version "0.2.6-a1",
+ :group-id "respo",
+ :artifact-id "markdown",
+ :skip-tag true,
+ :description "Respo Markdown converter.",
+ :scm-url "https://github.com/Respo/respo-markdown"}

@@ -4,14 +4,16 @@
             [respo-ui.core :as ui]
             [respo.comp.space :refer [=<]]
             [respo-md.comp.md :refer [comp-md comp-md-block]]
-            [respo.core :refer [defcomp mutation-> <> div span textarea input a]]))
+            [respo.core :refer [defcomp <> div span textarea input a]]))
 
 (def initial-state {:draft "", :text ""})
 
 (defcomp
  comp-container
  (store highlighter)
- (let [states (:states store), state (or (:data states) initial-state)]
+ (let [states (:states store)
+       cursor (or (:cursor states) [])
+       state (or (:data states) initial-state)]
    (div
     {:style (merge ui/global {:width "80%", :margin "0 auto"})}
     (div {} (a {:href "https://github.com/Respo/respo-markdown"} (<> "respo-markdown")))
@@ -29,7 +31,7 @@
        {:style (merge ui/input {:width "100%"}),
         :value (:text state),
         :placeholder "text inline",
-        :on-input (mutation-> (assoc state :text (:value %e)))}))
+        :on-input (fn [e d!] (d! cursor (assoc state :text (:value e))))}))
      (div {} (comp-md (:text state))))
     (=< nil 40)
     (div
@@ -41,9 +43,9 @@
        {:placeholder "multi-line content",
         :value (:draft state),
         :style (merge ui/textarea {:height 240, :width "100%"}),
-        :on {:input (fn [e dispatch! mutate!]
+        :on {:input (fn [e d!]
                (println "Editing:" state (:value e))
-               (mutate! (assoc state :draft (:value e))))}}))
+               (d! cursor (assoc state :draft (:value e))))}}))
      (div
       {:style (merge ui/flex {:padding 8})}
       (comp-md-block

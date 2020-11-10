@@ -1,6 +1,6 @@
 
 (ns respo-md.comp.md
-  (:require-macros [respo-md.comp.md :refer [h3]])
+  (:require-macros [respo-md.comp.md :refer [h3 h4]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.core :as ui]
@@ -58,6 +58,7 @@
    (string/starts-with? line "# ") (list-> :h1 {} (render-inline (subs line 2)))
    (string/starts-with? line "## ") (list-> :h2 {} (render-inline (subs line 3)))
    (string/starts-with? line "### ") (list-> :h3 {} (render-inline (subs line 4)))
+   (string/starts-with? line "#### ") (list-> :h4 {} (render-inline (subs line 5)))
    (string/starts-with? line "> ") (list-> :blockquote {} (render-inline (subs line 2)))
    (string/starts-with? line "* ") (list-> :li {} (render-inline (subs line 2)))
    :else (list-> :div {} (render-inline line))))
