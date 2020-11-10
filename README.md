@@ -4,7 +4,7 @@ Respo Markdown
 
 Render Markdown subset to Respo DSL.
 
-Demo http://repo.respo-mvc.org/markdown/
+Demo http://repo.respo-mvc.org/respo-markdown/
 
 Supported features:
 
