@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-clojars
 
       - name: run tests
-        run: 'yarn && yarn shadow-cljs compile app test'
+        run: 'yarn && yarn shadow-cljs compile client'
 
       - run: node target/test.js
 
