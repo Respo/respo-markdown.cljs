@@ -4,8 +4,8 @@
             [respo-md.comp.container :refer [comp-container]]
             [cljs.reader :refer [read-string]]
             [respo-md.schema :as schema]
-            [respo.cursor :refer [mutate]]
-            ["highlight.js/lib/highlight" :as hljs]
+            [respo.cursor :refer [update-states]]
+            ["highlight.js/lib/core" :as hljs]
             ["highlight.js/lib/languages/clojure" :as clojure-lang]
             ["highlight.js/lib/languages/bash" :as bash-lang]
             [respo-md.config :as config]))
@@ -13,7 +13,7 @@
 (defonce *store (atom schema/store))
 
 (defn dispatch! [op op-data]
-  (let [next-store (if (= op :states) (update @*store :states (mutate op-data)) @*store)]
+  (let [next-store (if (= op :states) (update-states @*store op-data) @*store)]
     (reset! *store next-store)))
 
 (defn highligher [code lang]

@@ -4,12 +4,12 @@ Respo Markdown
 
 Render Markdown subset to Respo DSL.
 
-Demo http://repo.respo-mvc.org/markdown/
+Demo http://repo.respo-mvc.org/respo-markdown/
 
 Supported features:
 
 * Code block
-* Headers, h1, h2, h3
+* Headers, h1, h2, h3, h4
 * Quoteblock
 * Unordered list
 * Inline code
